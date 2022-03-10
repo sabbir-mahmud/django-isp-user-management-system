@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% block title %}{{client.name}}{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="profile-wrapper">
+            <div class="title mt-3">
+                <h3>Client Details: {{client.name}} </h3>
+                <a class="btn btn-primary mr-3"   href="{% url 'client-update' client.id %}" >Edit</a>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6 name">
+                    <h3>Name: {{client.user.first_name}} {{client.user.last_name}}</h3>
+                    <h3>Client ID: {{client.client_id}}</h3>
+                    <h3>IP/Username: {{client.ip_username}}</h3>
+                    <h3>Status: {{client.status}}</h3>
+                    <h3>Address: {{client.address}}</h3>
+                    <h3>Email: {{client.user.email}}</h3>
+                    <h3>Phone: {{client.user.phone}}</h3>
+                </div>
+                <div class="col-lg-6 name">
+                    <h3>Pop Name: {{client.pop_details.pop_name}}</h3>
+                    <h3>Olt: {{client.olt_details}}</h3>
+                    <h3>Onu: {{client.onu_details}}</h3>
+                    <h3>Switch: {{client.switch_details}}</h3>
+                    <h3>Router: {{client.router_details}}</h3>
+                    <h3>Speed: {{client.package_details.speed}} Mb/s</h3>                   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

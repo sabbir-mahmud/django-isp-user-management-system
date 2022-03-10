@@ -1,0 +1,65 @@
+{% extends 'core/inside_devices.html' %}
+{% block title %}Pop Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Pop Details:</h3>
+        </div>
+        <div class="search-arera my-3">
+            <form method="get">
+                {{filters.form}}
+                <button class="btn btn-sm btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table  table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col"><a class="btn btn-primary" href="{% url 'pop-add' %}">Add
+                                New Entry</a></td>
+                        <td colspan="6">Total pop: {{totalpop}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Main Pop</th>
+                        <th scope="col">Sub Pop</th>
+                        <th scope="col">Users</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in pop %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{p.date}}</td>
+                        {% if p.main_pop_name %}
+                        <td>{{p.main_pop_name}}</td>
+                        {% else %}
+                        <td>{{p.pop_name}}</td>
+                        {% endif %}
+                        <td>{{p.pop_name}}</td>
+                        <td>{{p.users}}</td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'pop-update' p.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'package-del' p.id %}">Del</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            {% if pop.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{pop.previous_page_number}}">previous</a>
+            {% endif %}
+            {{pop.number}}
+            {% if pop.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{pop.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

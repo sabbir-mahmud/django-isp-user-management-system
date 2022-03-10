@@ -1,0 +1,48 @@
+/* -------
+user page
+ --------*/
+
+.user-dashboard-wrapper {
+    background: #8080800a;
+    box-shadow: 0px 0px 3px 0px;
+    width: 97%;
+    margin: auto;
+    margin-bottom: 1.5%;
+    margin-top: 3%;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+.profile-title {
+    margin-top: 2%;
+    margin-left: 1%;
+    margin-bottom: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-title h3 {
+    font-size: 27px;
+    display: inline-block;
+    font-family: emoji;
+    color: #000000e6;
+}
+
+.profile-title a {
+    margin-right: 0;
+    box-shadow: 0px 1px 3px 0px black;
+}
+
+.profile-details h3 {
+    margin-top: 2%;
+    margin-left: 1%;
+    font-size: 19px;
+    font-family: emoji;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.profile-btn {
+    margin-bottom: 1%;
+}

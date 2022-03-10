@@ -1,0 +1,86 @@
+{% extends 'home/home.html' %}
+{% block content %}
+<section>
+  <div class="container">
+    <div class="user-dashboard-wrapper">
+      <div class="profile-title">
+        <h3>Profile:</h3>
+        <div>
+
+
+          {% if request.user.clients.paid == False %} 
+            {% if request.user.worker %}
+            <a class="btn btn-primary" href="{% url 'daily-invoice' %}">Invoice</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'client_logout' %}">Pay</a>
+            {% endif %}                   
+          {% else %}
+          {% if request.user.worker %}
+            <a class="btn btn-primary" href="{% url 'daily-invoice' %}">Invoice</a>
+            {% else %}
+          <a class="btn btn-primary" href="{% url 'user_dashboard' %}">Paid</a>
+          {% endif %}
+          {% endif %}
+          <a class="btn btn-primary" href="#">Change Password</a>
+        </div>
+      </div>
+      <hr>
+      <div class="user-profile-wrapper">
+        <div class="profile-details">
+          <h3>Full Name: <span>{{request.user.first_name}} {{request.user.last_name}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Email: <span>{{request.user.email}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Phone: <span>{{request.user.phone}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Status: <span>{{request.user.clients.status}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>IP or Username: <span>{{request.user.clients.ip_username}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Package: <span>{{request.user.clients.package_details.name}}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Raw Speed: <span>{{request.user.clients.package_details.speed}} Mbps</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Google Speed: <span>{{request.user.clients.package_details.ggc}} Mbps</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Facebook Speed: <span>{{request.user.clients.package_details.fna}} Mbps</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Public Ip: <span>{% if request.user.clients.package_details.public_ip %}
+              Yes
+              {% else%}
+              No
+              {% endif %}</span></h3>
+        </div>
+
+        <div class="profile-details">
+          <h3>Price: <span>{{request.user.clients.package_details.price}}/= TK</span></h3>
+        </div>
+        <hr>
+        <div class="profile-btn">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

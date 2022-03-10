@@ -1,0 +1,68 @@
+{% extends 'core/inside_devices.html' %}
+{% block title %}Onu Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Onu Details:</h3>
+        </div>
+        <div class="search-arera my-3">
+            <form method="get">
+                {{filters.form}}
+                <button class="btn btn-sm btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan=""><a class="btn btn-primary" href="{% url 'onu-add' %}">Add New
+                                Entry</a></td>
+                        <td colspan="9">Total: {{total.price__sum}}/= Tk</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">serial number</th>
+                        <th scope="col">Mac Address</th>
+                        <th scope="col">Ethernet Ports</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for onu in onus %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{onu.date}}</td>
+                        <td>{{onu.brand}}</td>
+                        <td>{{onu.model}}</td>
+                        <td>{{onu.serial_number}}</td>
+                        <td>{{onu.pon_mac}}</td>
+                        <td>{{onu.ethernet_ports}}</td>
+                        <td>{{onu.status}}</td>
+                        <td>{{onu.price}}</td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'onu-update' onu.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'onu-del' onu.id %}">Del</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if onus.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{onus.previous_page_number}}">previous</a>
+            {% endif %}
+            {{onus.number}}
+            {% if onus.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{onus.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

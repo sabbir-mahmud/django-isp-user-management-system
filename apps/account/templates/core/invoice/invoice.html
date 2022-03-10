@@ -1,0 +1,41 @@
+{% extends 'core/earning/earning_base.html' %}
+{% block title %}Add Invoice Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Add Invoice details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form class="edit-form-profit" action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">
+                        <div> 
+                            {{form.Staffs_details.label_tag}}
+                            {{form.Staffs_details}}
+                            {{form.Staffs_details.errors}}
+                        </div>
+                        {{form.month.label_tag}}
+                        {{form.month}}
+                        {{form.month.errors}}
+                        {{form.year.label_tag}}
+                        {{form.year}}
+                        {{form.year.errors}}
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.invoice_amount.label_tag}}
+                        {{form.invoice_amount}}
+                        {{form.invoice_amount.errors}}
+                        {{form.invoice_details.label_tag}}
+                        {{form.invoice_details}}
+                        {{form.invoice_details.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

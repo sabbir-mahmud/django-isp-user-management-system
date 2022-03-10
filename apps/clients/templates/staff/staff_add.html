@@ -1,0 +1,42 @@
+{% extends 'staff/staff_show.html' %}
+{% block title %}New Staff Entry{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Add staff details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">
+                        {{form.user.label_tag}}
+                        {{form.user}}
+                        {{form.user.errors}}
+                        {{form.staffs_Id.label_tag}}
+                        {{form.staffs_Id}}
+                        {{form.staffs_Id.errors}}
+                        {{form.address.label_tag}}
+                        {{form.address}}
+                        {{form.address.errors}}
+
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.salary.label_tag}}
+                        {{form.salary}}
+                        {{form.salary.errors}}
+                        {{form.stafftype.label_tag}}
+                        {{form.stafftype}}
+                        {{form.stafftype.errors}}
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

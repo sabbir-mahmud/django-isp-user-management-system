@@ -1,0 +1,46 @@
+{% extends 'core/mc/mc_base.html' %}
+{% block title %}New MC Entry{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Add Mc details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">
+                        {{form.brand.label_tag}}
+                        {{form.brand}}
+                        {{form.brand.errors}}
+                        {{form.model.label_tag}}
+                        {{form.model}}
+                        {{form.model.errors}}
+                        {{form.serial_number.label_tag}}
+                        {{form.serial_number}}
+                        {{form.serial_number.errors}}
+                        {{form.model.errors}}
+                        {{form.price.label_tag}}
+                        {{form.price}}
+                        {{form.price.errors}}
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.pon_mac.label_tag}}
+                        {{form.pon_mac}}
+                        {{form.pon_mac.errors}}
+                        {{form.ethernet_ports.label_tag}}
+                        {{form.ethernet_ports}}
+                        {{form.ethernet_ports.errors}}
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

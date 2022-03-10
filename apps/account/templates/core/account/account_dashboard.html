@@ -1,0 +1,128 @@
+{% extends 'core/base.html' %}
+{% block title %}Accounts Dashboard{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <!-- Company Investment details -->
+    <div class="user-profile-wrapper bg-light mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Investment Details:</h1>
+            {% if request.user.admin %}
+            <a class="btn btn-primary" href="{% url 'commissionUpdate' 1 %}">Update Commission</a>
+            {% endif %}
+        </div>
+        <hr>
+        <div class="row justify-content-around">
+            <div class="col-lg-4 user-panel bg-primary rounded-3 p-3">
+                <h3 class="text-white"> <a class="text-white" href="{% url 'investment-show' %}"> Total
+                        Investment:</a>{{total_investment_price.invest_amount__sum}} /= Tk</h3>
+                <h3 class="text-white"><a class="text-white" href="{% url 'earning-show' %}">Total Earn:</a>
+                    {{total_earning.earning_amount__sum}} /= Tk</h3>
+            </div>
+            <div
+                class="col-lg-4 user-panel {% if loss %}bg-danger{% endif %} {% if profit %}bg-success{% endif %} rounded-3 p-3">
+                <h3 class="text-white">Profit: {{profit}} /= Tk </h3>
+                <h3 class="text-white">Loss: {{loss}} /= Tk</h3>
+            </div>
+            <div class="col-lg-4 user-panel bg-success rounded-3 p-3">
+                <h3 class="text-white">Total Bill: {{total_bill.package_details__price__sum}} /= Tk</h3>
+                <h3 class="text-white">Upsteam Bill: {{upsteamBill}} /= Tk</h3>
+                <h3 class="text-white">Earn by Bill: {{billearn}} /= Tk</h3>
+            </div>
+        </div>
+
+
+        <div class="user-profile-wrapper mt-5">
+            <h1>ISP & Invoice Details:</h1>
+            <hr>
+            <div class="row justify-content-around">
+                <!--- invoice -->
+                <div class="col-lg-4  user-panel bg-danger rounded-3 p-3">
+                    <h3>
+                        <a class="text-white" href="{% url 'daily-invoice' %}">
+                            Daily Invoice:
+                            {% if total_daily_invoice.invoice_amount__sum %}
+                            {{total_daily_invoice.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+                    <h3>
+                        <a class="text-white" href="{% url 'monthly-invoice' %}">
+                            Monthly Invoice:
+                            {% if total_monthly_invoice.invoice_amount__sum %}
+                            {{total_monthly_invoice.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+                    <h3>
+                        <a class="text-white" href="{% url 'yearly-invoice' %}">
+                            Yearly Invoice:
+                            {% if total_yearly_invoice.invoice_amount__sum %}
+                            {{total_yearly_invoice.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+
+                </div>
+                <!--- Earning details -->
+                <div class="col-lg-4 user-panel bg-warning rounded-3 p-3">
+                    <h3>
+                        <a class="text-white" href="{% url 'daily-earning' %}">
+                            Daily Earn:
+                            {% if total_daily_earn.invoice_amount__sum %}
+                            {{total_daily_earn.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+
+                    <h3>
+                        <a class="text-white" href="{% url 'monthly-earning' %}">
+                            Monthly Earn:
+                            {% if total_monthly_earn.invoice_amount__sum %}
+                            {{total_monthly_earn.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+
+                    <h3>
+                        <a class="text-white" href="{% url 'yearly-earning' %}">
+                            Yearly Earn:
+                            {% if total_yearly_earn.invoice_amount__sum %}
+                            {{total_yearly_earn.invoice_amount__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+                </div>
+                <div class="col-lg-4 user-panel bg-secondary rounded-3 p-3">
+                    <h3>
+                        <a class="text-white" href="{% url 'staff-show' %}">
+                            Staff's Salary :
+                            {% if total_salary.salary__sum %}
+                            {{total_salary.salary__sum}} /= Tk
+                            {% else %}
+                            0
+                            {% endif %}
+                        </a>
+                    </h3>
+                    <h3>
+                        <a class="text-white" href="{% url 'reseller-list' %}">
+                            Reseller's
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endblock content %}

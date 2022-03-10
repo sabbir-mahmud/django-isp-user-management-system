@@ -1,0 +1,56 @@
+{% extends 'core/account/account_dashboard.html' %}
+{% block title %}Patners Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Patner Details:</h3>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table table-hover">
+                <thead>
+                    {% if request.user.admin %}
+                    <tr>
+                        <td scope="col" colspan='5'>
+                            <a class="btn btn-primary" href="{% url 'owner-add' %}">
+                                Add
+                            </a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Invest Amount</th>
+                        <th scope="col">Company Share</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in owners %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                        <td>{{i.invest_amount}} /= TK</td>
+                        <td>{{i.commission}} % </td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'owner-edit' i.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'owner-del' i.id %}">Del</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if owners.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{owners.previous_page_number}}">previous</a>
+            {% endif %}
+            {{owners.number}}
+            {% if owners.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{owners.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

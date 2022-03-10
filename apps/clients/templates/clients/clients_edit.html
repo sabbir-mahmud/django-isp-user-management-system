@@ -1,0 +1,51 @@
+{% extends 'clients/clients_list.html' %}
+{% block title %}Update Clients Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Update Clients details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">                        
+                        {{form.ip_username.label_tag}}
+                        {{form.ip_username}}
+                        {{form.ip_username.errors}}
+                        {{form.router_details.label_tag}}
+                        {{form.router_details}}
+                        {{form.router_details.errors}}
+                        {{form.package_details.label_tag}}
+                        {{form.package_details}}
+                        {{form.package_details.errors}}
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                        {% if request.user.admin %}
+                        {{form.paid.label_tag}}
+                        {{form.paid}}
+                        {{form.paid.errors}}
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.address.label_tag}}
+                        {{form.address}}
+                        {{form.address.errors}}
+                        {{form.onu_details.label_tag}}
+                        {{form.onu_details}}
+                        {{form.onu_details.errors}}
+                        {{form.switch_details.label_tag}}
+                        {{form.switch_details}}
+                        {{form.switch_details.errors}}
+                        {{form.pop_details.label_tag}}
+                        {{form.pop_details}}
+                        {{form.pop_details.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Update">
+            </form>
+        </div>
+</section>
+{% endblock %}

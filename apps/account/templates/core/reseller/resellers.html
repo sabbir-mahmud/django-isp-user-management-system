@@ -1,0 +1,57 @@
+{% extends 'core/account/account_dashboard.html' %}
+{% block title %}Resellers Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Resellers Details:</h3>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan='6'>
+                            <a class="btn btn-primary" href="{% url 'reseller-add' %}">
+                                Add
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Reseller ID</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Commission</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in resellers %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                        <td>{{i.rid}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.commission}} % </td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'reseller-edit' i.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'reseller-del' i.id %}">Del</a>
+                            {% endif %}
+                            <a class="btn btn-primary ml-1" href="{% url 'reseller_commission_add' i.id %}">Commission</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if resellers.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{resellers.previous_page_number}}">previous</a>
+            {% endif %}
+            {{resellers.number}}
+            {% if resellers.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{resellers.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

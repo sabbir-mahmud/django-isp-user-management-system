@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{request.user.first_name}}'s Dashboard</title>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- main css -->
+  <link rel="stylesheet" href="{% static 'core/main.css' %}">
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'inside' %}">{{isp_info.name}}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reseller_dashboard' %}">Client's</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reseller_accounts' %}">Accounts</a>
+                    </li>
+
+                    <!-- user profile  -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_dashboard' %}">{{request.user.first_name}}</a>
+                    </li>
+
+                    <!-- log out  -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_logout' %}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end navbar -->
+    <!-- client details -->
+    {% block content %}
+    <section>
+        <div class="container-fluid">
+            <div class="clients-title">
+                <h3>Clients Details:</h3>
+            </div>
+            <div class="search">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="clients-id" placeholder="Client ID">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="clients-wrapper">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td scope="col"><a class="btn btn-sm btn-primary" href="{% url 'client-add' %}">Add</a></td>
+                            <td>Total User: {{count}}</td>
+                            <td>Active User: {{active}}</td>
+                            <td>Inactive User: {{inactive}}</td>
+                            <td> <a href="{% url 'reseller_dashboard_paid' %}">Paid User: {{paid_count}}</a></td>
+                            <td colspan="6"><a href="{% url 'reseller_dashboard_unpaid' %}">Unpaid User: {{unpaid_count}}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="width:90px" scope="col">S/L</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Client id</th>
+                            <th scope="col">IP/Username</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Bill</th>
+                            <th scope="col">Paid Status</th>
+                            <th scope="col">Pop Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{client.user.first_name}} {{client.user.last_name}}</td>
+                            <td>{{client.client_id}}</td>
+                            <td>{{client.ip_username}}</td>
+                            <td>{{client.address}}</td>
+                            <td>{{client.status}}</td>
+                            <td>{{client.package_details.price}} /= TK</td>
+                            <td>
+                                {%if client.paid %}
+                                Yes
+                                {% else %}
+                                No
+                                {% endif %}
+
+                            </td>
+                            <td>{{client.pop_details.pop_name}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% if clients.has_previous %}
+                <a class="btn prev-btn btn-success mb-3" href="?p={{clients.previous_page_number}}">previous</a>
+                {% endif %}
+                {{clients.number}}
+                {% if clients.has_next %}
+                <a class="btn next-btn btn-success mb-3" href="?p={{clients.next_page_number}}">next</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

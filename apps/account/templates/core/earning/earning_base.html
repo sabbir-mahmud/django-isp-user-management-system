@@ -1,0 +1,52 @@
+{% extends 'core/account/account_dashboard.html' %}
+{% block title %}Earning Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Earning Details:</h3>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table  table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan=""><a class="btn btn-primary" href="{% url 'profit-add' %}">Add New
+                                Entry</a></td>
+                        <td colspan="6">Total: {{total.earning_amount__sum}}/= Tk</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Earning Details</th>
+                        <th scope="col">Earning Amount</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for earn in earning %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{earn.date}}</td>
+                        <td>{{earn.earning_details}}</td>
+                        <td>{{earn.earning_amount}}</td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'profit-update' earn.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'profit-del' earn.id %}">Del</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if earning.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{earning.previous_page_number}}">previous</a>
+            {% endif %}
+            {{earning.number}}
+            {% if earning.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{earning.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

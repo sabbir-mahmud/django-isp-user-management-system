@@ -1,0 +1,40 @@
+{% extends 'core/mikrotik/mikrotik_base.html' %}
+{% block title %}New Mikrotik Entry{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Add Mikrotik details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">
+                        {{form.model.label_tag}}
+                        {{form.model}}
+                        {{form.model.errors}}
+                        {{form.serial_number.label_tag}}
+                        {{form.serial_number}}
+                        {{form.serial_number.errors}}
+                        {{form.pop_name.label_tag}}
+                        {{form.pop_name}}
+                        {{form.pop_name.errors}}
+
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                        {{form.price.label_tag}}
+                        {{form.price}}
+                        {{form.price.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

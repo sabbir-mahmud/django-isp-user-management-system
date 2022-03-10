@@ -1,0 +1,33 @@
+{% extends 'core/pop/pop_show.html' %}
+{% block title %}New Pop Entry{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="form-title">
+            <h3>Add Pop details: </h3>
+        </div>
+        <div class="form-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6 form-left">
+                        {{form.pop_name.label_tag}}
+                        {{form.pop_name}}
+                        {{form.pop_name.errors}}
+                        {{form.users.label_tag}}
+                        {{form.users}}
+                        {{form.users.errors}}
+                    </div>
+                    <div class="col-lg-6 form-right">
+                        {{form.main_pop_name.label_tag}}
+                        {{form.main_pop_name}}
+                        {{form.main_pop_name.errors}}
+                    </div>
+                </div>
+                <input class="btn btn-primary sub-btn" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

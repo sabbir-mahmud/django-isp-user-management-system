@@ -1,0 +1,80 @@
+<!-- extending base html file -->
+{% extends 'core/base.html' %}
+{% block title %}Clients Details{% endblock title %}
+
+<!-- client details -->
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="clients-title">
+            <h3>Clients Details:</h3>
+        </div>
+        <div class="search-arera my-3">
+            <form method="get">
+                {{filters.form}}
+                <button class="btn btn-sm btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="clients-wrapper">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col"><a class="btn btn-sm btn-primary" href="{% url 'client-add' %}">Add</a></td>
+                        <td>Total User: {{count}}</td>
+                        <td>Active User: {{active}}</td>
+                        <td>Inactive User: {{inactive}}</td>
+                        <td> <a href="{% url 'paid-client-show' %}">Paid User: {{paid_count}}</a></td>
+                        <td colspan="7"><a href="{% url 'unpaid-client-show' %}">Unpaid User: {{unpaid_count}}</a></td>
+                    </tr>
+                    <tr>
+                        <th style="width:90px" scope="col">S/L</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Client id</th>
+                        <th scope="col">IP/Username</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Bill</th>
+                        <th scope="col">Paid Status</th>
+                        <th scope="col">Pop Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{client.user.first_name}} {{client.user.last_name}}</td>
+                        <td>{{client.client_id}}</td>
+                        <td>{{client.ip_username}}</td>
+                        <td>{{client.address}}</td>
+                        <td>{{client.status}}</td>
+                        <td>{{client.package_details.price}} /= TK</td>
+                        <td>
+                            {%if client.paid %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+
+                        </td>
+                        <td>{{client.pop_details.pop_name}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{% url 'client-update' client.id %}">Edit</a>
+                            <a class="btn btn-warning" href="{% url 'client-profile' client.id %}">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if clients.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{clients.previous_page_number}}">previous</a>
+            {% endif %}
+            {{clients.number}}
+            {% if clients.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{clients.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

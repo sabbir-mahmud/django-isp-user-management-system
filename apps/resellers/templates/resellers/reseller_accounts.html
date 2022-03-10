@@ -1,0 +1,48 @@
+{% extends 'resellers/reseller_dashboard.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="is-title">
+        <h3>Commision Details:</h3>
+    </div>
+    <div class="search-arera my-3">
+        <form method="get">
+            {{filters.form}}
+            <button class="btn btn-sm btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="is-wrapper">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="width:90px" scope="col">S/L</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Commision</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in commissions %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.date}}</td>
+                    <td>{{i.commission_amount}}/tk</td>
+                    <td>
+                        {% comment %} <a class="btn btn-primary" href="{% url 'i-update' i.id %}">Edit</a>
+                        <a class="btn btn-warning" href="{% url 'i-profile' i.id %}">View</a> {% endcomment %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if is.has_previous %}
+        <a class="btn prev-btn btn-success mb-3" href="?p={{is.previous_page_number}}">previous</a>
+        {% endif %}
+        {{is.number}}
+        {% if is.has_next %}
+        <a class="btn next-btn btn-success mb-3" href="?p={{is.next_page_number}}">next</a>
+        {% endif %}
+    </div>
+</div>
+</section>
+
+{% endblock content %}

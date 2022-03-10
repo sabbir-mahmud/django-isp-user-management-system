@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% block title %}Staff Details{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid">
+        <div class="base-title">
+            <h3>Staff Details:</h3>
+        </div>
+        <div class="fiber-details-wrappers">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td scope="col" colspan=""><a class="btn btn-primary" href="{% url 'staff-add' %}">Add</a></td>
+                        <td colspan="9">Total Salary: {{salary.salary__sum}}/= Tk</td>
+                    </tr>
+                    <tr>
+                        <th scope="col">S/L</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Staff ID</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Staff Type</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in staff %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.staffs_Id}}</td>
+                        <td>{{i.user.phone}}</td>
+                        <td>{{i.stafftype}}</td>
+                        <td>{{i.salary}}</td>
+                        <td>{{i.status}}</td>
+                        <td>
+                            <a class="btn btn-primary ml-1" href="{% url 'staff-edit' i.id %}">Edit</a>
+                            {% if request.user.admin %}
+                            <a class="btn btn-danger ml-1" href="{% url 'staff-del' i.id %}">Del</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if staff.has_previous %}
+            <a class="btn prev-btn btn-success mb-3" href="?p={{staff.previous_page_number}}">previous</a>
+            {% endif %}
+            {{staff.number}}
+            {% if staff.has_next %}
+            <a class="btn next-btn btn-success mb-3" href="?p={{staff.next_page_number}}">next</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
