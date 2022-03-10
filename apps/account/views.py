@@ -18,8 +18,10 @@ from .forms import OwnerForm, ResellerForm, InvestmentAdd, EarningAdd, Commissio
 @admin_roles
 def account_dashboard(request):
     # Investment and profit details
-    total_investment = Investment.objects.aggregate(Sum('invest_amount'))
-    total_earning = Earning.objects.aggregate(Sum('earning_amount'))
+    total_investment = Investment.objects.aggregate(Sum('invest_amount'))[
+        'invest_amount__sum'] if Investment.objects.filter().exists() else 0
+    total_earning = Earning.objects.aggregate(Sum('earning_amount'))[
+        'earning_amount__sum'] if Earning.objects.filter().exists() else 0
 
     # profit calculator
     def total_profit(invest, earn):
@@ -36,47 +38,47 @@ def account_dashboard(request):
             return invest - earn
 
     # profit and loss details
-    profit = total_profit(total_investment['invest_amount__sum'],
-                          total_earning['earning_amount__sum'])
-    loss = total_loss(total_investment['invest_amount__sum'],
-                      total_earning['earning_amount__sum'])
+    profit = total_profit(total_investment,
+                          total_earning)
+    loss = total_loss(total_investment,
+                      total_earning)
 
     # Isp details
     isp_info = Isp_info.objects.filter(id=1).first()
 
     # billing details
     total_bill = Clients.objects.filter(status='Active').aggregate(
-        Sum('package_details__price'))
+        Sum('package_details__price'))['package_details__price__sum'] if Clients.objects.filter().exists() else 0
     billprofit = Upsteam_deal.objects.get(id=1)
-    billearn = (total_bill['package_details__price__sum'] *
-                billprofit.upsteam_deal) / 100
-    upsteamBill = total_bill['package_details__price__sum'] - billearn
+    billearn = (total_bill * billprofit.upsteam_deal) / 100
+    upsteamBill = total_bill - billearn
     collectedBill = Clients.objects.filter(paid=True).aggregate(
-        Sum('package_details__price'))
-    pendingbill = total_bill['package_details__price__sum'] - collectedBill[
-        'package_details__price__sum']
+        Sum('package_details__price'))['package_details__price__sum'] if Clients.objects.filter(paid=True).exists() else 0
+    pendingbill = total_bill - collectedBill
 
     # daily invoice amount
     total_daily_invoice = Daily_Invoice.objects.filter(
         Q(month__active=True) & Q(year__active=True)).aggregate(
-        Sum('invoice_amount'))
+        Sum('invoice_amount')) if Daily_Invoice.objects.filter().exists() else 0
     # daily earn amount
     total_daily_earn = Daily_Earn.objects.filter(
-        Q(month__active=True) & Q(year__active=True)).aggregate(Sum('invoice_amount'))
+        Q(month__active=True) & Q(year__active=True)).aggregate(Sum('invoice_amount')) if Daily_Earn.objects.filter().exists() else 0
     # monthly invoice amount
     total_monthly_invoice = Monthly_Invoice.objects.aggregate(
-        Sum('invoice_amount'))
+        Sum('invoice_amount')) if Monthly_Invoice.objects.filter().exists() else 0
     # monthly earn amount
-    total_monthly_earn = Monthly_Earn.objects.aggregate(Sum('invoice_amount'))
+    total_monthly_earn = Monthly_Earn.objects.aggregate(
+        Sum('invoice_amount')) if Monthly_Earn.objects.filter().exists() else 0
     # yearly invoice amount
     total_yearly_invoice = Yearly_Invoice.objects.aggregate(
-        Sum('invoice_amount'))
+        Sum('invoice_amount')) if Yearly_Invoice.objects.filter().exists() else 0
     # yearly earn amount
-    total_yearly_earn = Yearly_Earn.objects.aggregate(Sum('invoice_amount'))
+    total_yearly_earn = Yearly_Earn.objects.aggregate(
+        Sum('invoice_amount')) if Yearly_Earn.objects.filter().exists() else 0
 
     # total staff salary
     total_salary = Staffs.objects.filter(
-        status='Active').aggregate(Sum('salary'))
+        status='Active').aggregate(Sum('salary')) if Staffs.objects.filter().exists() else 0
     # isp info
     isp_info = Isp_info.objects.filter(id=1).first()
     # context
