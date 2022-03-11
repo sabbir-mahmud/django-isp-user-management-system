@@ -55,7 +55,6 @@ def insideView(request):
     # billing details
     total_bill = Clients.objects.filter(status='Active').aggregate(
         Sum('package_details__price'))['package_details__price__sum'] if Clients.objects.filter().exists() else 0
-    print(total_bill)
     billprofit = Upsteam_deal.objects.get(id=1)
     billearn = (total_bill *
                 billprofit.upsteam_deal) / 100
@@ -89,6 +88,9 @@ def insideView(request):
         'share_amount': share_amount,
         'invest_amount': invest_amount,
         'profit_amount': profit_amount,
+        'pendingbill': pendingbill,
+        'collectedBill': collectedBill,
+
     }
     # returning html file
     return render(request, 'core/inside.html', context)
