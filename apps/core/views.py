@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Fiber, Mikrotik, Olt, Onu, Switch, Router, Package, Isp_info, Pop
 from apps.account.models import Investment, Earning, Upsteam_deal, Month, Year, Daily_Invoice, Monthly_Invoice, Daily_Earn, Monthly_Earn, Yearly_Earn, Yearly_Invoice
 from apps.clients.models import Clients
-from apps.users.models import Owners
+from apps.users.models import Owners, Staffs
 from .forms import FiberAdd, MikrotikAdd, OltAdd, OnuAdd, SwitchAdd, RouterAdd, PackageAdd, IspUpdate, PopForm
 from django.db.models import Sum
 from django.core.paginator import Paginator
@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from apps.clients.decorators import user_roles, admin_roles, staff_roles
 from .filters import FiberFilter, MikrotikFilter, OltFilter, OnuFilter, SwitchFilter, RouterFilter, PopFilter
 from django.db.models import Q
+from apps.resellers.models import Resellers
 
 # isp inside view
 
@@ -75,6 +76,10 @@ def insideView(request):
     invest_amount = owner.invest_amount
     profit_amount = billearn*share_amount/100
 
+    # reseller and staff details
+    reseller_count = Resellers.objects.all().count()
+    staff_count = Staffs.objects.all().count()
+
     context = {
         'isp_info': isp_info,
         'count': count,
@@ -90,6 +95,8 @@ def insideView(request):
         'profit_amount': profit_amount,
         'pendingbill': pendingbill,
         'collectedBill': collectedBill,
+        'reseller_count': reseller_count,
+        'staff_count': staff_count,
 
     }
     # returning html file
