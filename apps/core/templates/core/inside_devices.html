@@ -46,66 +46,76 @@
 {% endblock navbar %}
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-around">
-        <div class="col-lg-4 user-panel bg-primary">
-            <h1 class="text-white">Fiber Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Fiber: {{total_fiber.metre__sum}} Metre</h3>
-            <h3 class="text-white">Active Fiber: {{active_fiber}}</h3>
-            <h3 class="text-white">Inactive Fiber: {{store_fiber}}</h3>
-            <h3 class="text-white">Damage Fiber: {{damage_fiber}}</h3>
-            <h3 class="text-white">Fiber Price: {{total_fiber_price.price__sum}}</h3>
+    <div class="row row-cols-1 row-cols-lg-3 g-2 my-3">
+        <div class="col">
+            <div class="user-panel bg-primary">
+                <h1 class="text-white">Fiber Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Fiber: {{total_fiber.metre__sum}} Metre</h3>
+                <h3 class="text-white">Active Fiber: {{active_fiber}}</h3>
+                <h3 class="text-white">Inactive Fiber: {{store_fiber}}</h3>
+                <h3 class="text-white">Damage Fiber: {{damage_fiber}}</h3>
+                <h3 class="text-white">Fiber Price: {{total_fiber_price.price__sum}}</h3>
 
+            </div>
         </div>
-        <div class="col-lg-4 user-panel bg-secondary">
-            <h1 class="text-white">Mikrotik Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Mikrotik: {{total_mikrotik}}</h3>
-            <h3 class="text-white">Active Mikrotik: {{active_mikrotik}}</h3>
-            <h3 class="text-white">Inactive Mikrotik: {{store_mikrotik}}</h3>
-            <h3 class="text-white">Damage Mikrotik: {{damage_mikrotik}}</h3>
-            <h3 class="text-white">Mikrotik Price: {{total_mikrotik_price.price__sum}}</h3>
+        <div class="col">
+            <div class="user-panel bg-secondary">
+                <h1 class="text-white">Mikrotik Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Mikrotik: {{total_mikrotik}}</h3>
+                <h3 class="text-white">Active Mikrotik: {{active_mikrotik}}</h3>
+                <h3 class="text-white">Inactive Mikrotik: {{store_mikrotik}}</h3>
+                <h3 class="text-white">Damage Mikrotik: {{damage_mikrotik}}</h3>
+                <h3 class="text-white">Mikrotik Price: {{total_mikrotik_price.price__sum}}</h3>
 
+            </div>
         </div>
-        <div class="col-lg-4 user-panel bg-success">
-            <h1 class="text-white">Olt Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Olt: {{total_olt}}</h3>
-            <h3 class="text-white">Active Olt: {{active_olt}}</h3>
-            <h3 class="text-white">Inactive Olt: {{store_olt}}</h3>
-            <h3 class="text-white">Damage Olt: {{damage_olt}}</h3>
-            <h3 class="text-white">Olt Price: {{total_olt_price.price__sum}}</h3>
+        <div class="col">
+            <div class="user-panel bg-success">
+                <h1 class="text-white">Olt Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Olt: {{total_olt}}</h3>
+                <h3 class="text-white">Active Olt: {{active_olt}}</h3>
+                <h3 class="text-white">Inactive Olt: {{store_olt}}</h3>
+                <h3 class="text-white">Damage Olt: {{damage_olt}}</h3>
+                <h3 class="text-white">Olt Price: {{total_olt_price.price__sum}}</h3>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-around mb-4">
-        <div class="col-lg-4 user-panel bg-success">
-            <h1 class="text-white">Onu Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Onu: {{total_onu}}</h3>
-            <h3 class="text-white">Active Onu: {{activeonur}}</h3>
-            <h3 class="text-white">Inactive Onu: {{store_onu}}</h3>
-            <h3 class="text-white">Damage Onu: {{damage_onu}}</h3>
-            <h3 class="text-white">Onu Price: {{total_onu_price.price__sum}}</h3>
+        <div class="col">
+            <div class="user-panel bg-success">
+                <h1 class="text-white">Onu Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Onu: {{total_onu}}</h3>
+                <h3 class="text-white">Active Onu: {{activeonur}}</h3>
+                <h3 class="text-white">Inactive Onu: {{store_onu}}</h3>
+                <h3 class="text-white">Damage Onu: {{damage_onu}}</h3>
+                <h3 class="text-white">Onu Price: {{total_onu_price.price__sum}}</h3>
 
+            </div>
         </div>
-        <div class="col-lg-4 user-panel bg-info">
-            <h1 class="text-white">Switch Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Switch: {{total_switch}}</h3>
-            <h3 class="text-white">Active Switch: {{active_switch}}</h3>
-            <h3 class="text-white">Inactive Switch: {{store_switch}}</h3>
-            <h3 class="text-white">Damage Switch: {{damage_switch}}</h3>
-            <h3 class="text-white">Switch Price: {{total_switch_price.price__sum}}</h3>
+        <div class="col">
+            <div class="user-panel bg-info">
+                <h1 class="text-white">Switch Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Switch: {{total_switch}}</h3>
+                <h3 class="text-white">Active Switch: {{active_switch}}</h3>
+                <h3 class="text-white">Inactive Switch: {{store_switch}}</h3>
+                <h3 class="text-white">Damage Switch: {{damage_switch}}</h3>
+                <h3 class="text-white">Switch Price: {{total_switch_price.price__sum}}</h3>
+            </div>
         </div>
-        <div class="col-lg-4 user-panel bg-primary">
-            <h1 class="text-white">Router Panel:</h1>
-            <hr class="text-white" />
-            <h3 class="text-white">Total Router: {{total_router}}</h3>
-            <h3 class="text-white">Active Router: {{active_router}}</h3>
-            <h3 class="text-white">Inactive Router: {{store_router}}</h3>
-            <h3 class="text-white">Damage Router: {{damage_router}}</h3>
-            <h3 class="text-white">Router Price: {{total_router_price.price__sum}}</h3>
+        <div class="col">
+            <div class="user-panel bg-primary">
+                <h1 class="text-white">Router Panel:</h1>
+                <hr class="text-white" />
+                <h3 class="text-white">Total Router: {{total_router}}</h3>
+                <h3 class="text-white">Active Router: {{active_router}}</h3>
+                <h3 class="text-white">Inactive Router: {{store_router}}</h3>
+                <h3 class="text-white">Damage Router: {{damage_router}}</h3>
+                <h3 class="text-white">Router Price: {{total_router_price.price__sum}}</h3>
 
+            </div>
         </div>
     </div>
 </div>

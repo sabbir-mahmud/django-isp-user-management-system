@@ -25,6 +25,8 @@
     <div class="container">
       {% if request.user.admin %}
       <a class="navbar-brand" href="{% url 'inside' %}">{{isp_info.name}}</a>
+      {% elif request.user.worker %}
+      <a class="navbar-brand" aria-current="page" href="{% url 'inside' %}">{{isp_info.name}}</a>
       {% else %}
       <a class="navbar-brand" href="{% url 'home-page' %}">{{isp_info.name}}</a>
       {% endif %}

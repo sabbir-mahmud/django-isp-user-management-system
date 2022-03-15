@@ -9,10 +9,12 @@
         <div class="fiber-details-wrappers">
             <table class="table table-hover">
                 <thead>
+                    {% if request.user.admin %}
                     <tr>
                         <td scope="col" colspan="9"><a class="btn btn-primary" href="{% url 'package-add' %}">Add
-                                New Entry</a></td>
+                                New Package</a></td>
                     </tr>
+                    {% endif %}
                     <tr>
                         <th scope="col">S/L</th>
                         <th scope="col">Name</th>
@@ -22,7 +24,9 @@
                         <th scope="col">Public Ip</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
+                        {% if request.user.admin %}
                         <th scope="col">Actions</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -41,9 +45,9 @@
                         </td>
                         <td>{{package.price}}</td>
                         <td>{{package.status}}</td>
+                        {% if request.user.admin %}
                         <td>
                             <a class="btn btn-primary ml-1" href="{% url 'package-update' package.id %}">Edit</a>
-                            {% if request.user.admin %}
                             <a class="btn btn-danger ml-1" href="{% url 'package-del' package.id %}">Del</a>
                             {% endif %}
                         </td>
