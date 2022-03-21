@@ -7,9 +7,9 @@ from apps.resellers.models import Resellers
 # user register form
 User = get_user_model()
 
-
-# Create your models here.
 # client id model
+
+
 class ClientId(models.Model):
     client_id = models.IntegerField(default=117100)
 
@@ -20,8 +20,19 @@ class ClientId(models.Model):
 
 
 class Clients(models.Model):
+    genders = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        ('Others', 'Others'),
+    )
     choice_status = (('Active', 'Active'), ('Inactive', 'Inactive'))
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=245)
+    last_name = models.CharField(max_length=245)
+    gender = models.CharField(max_length=245, choices=genders)
+    email = models.EmailField(max_length=245)
+    phone = models.CharField(max_length=11)
+    nid = models.CharField(max_length=13, unique=True)
     client_id = models.IntegerField(unique=True)
     ip_username = models.CharField(max_length=20,
                                    unique=True,

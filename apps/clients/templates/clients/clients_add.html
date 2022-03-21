@@ -11,18 +11,58 @@
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-lg-6 form-left">
+                        <div class="d-none">
+                            {{form.user.label_tag}}
+                            {{form.user}}
+                            {{form.user.errors}}
+                            {{form.client_id.label_tag}}
+                            {{form.client_id}}
+                            {{form.client_id.errors}}
+                        </div>
+
                         {{form.email.label_tag}}
                         {{form.email}}
                         {{form.email.errors}}
                         {{form.phone.label_tag}}
                         {{form.phone}}
                         {{form.phone.errors}}
-                        {{form.password.label_tag}}
-                        {{form.password}}
-                        {{form.password.errors}}
-                        {{form.password2.label_tag}}
-                        {{form.password2}}
-                        {{form.password2.errors}}
+                        {{form.nid.label_tag}}
+                        {{form.nid}}
+                        {{form.nid.errors}}
+
+                        {{form.ip_username.label_tag}}
+                        {{form.ip_username}}
+                        {{form.ip_username.errors}}
+                        {{form.address.label_tag}}
+                        {{form.address}}
+                        {{form.address.errors}}
+                        {{form.olt_details.label_tag}}
+                        {{form.olt_details}}
+                        {{form.olt_details.errors}}
+                        {{form.onu_details.label_tag}}
+                        {{form.onu_details}}
+                        {{form.onu_details.errors}}
+                        {{form.switch_details.label_tag}}
+                        {{form.switch_details}}
+                        {{form.switch_details.errors}}
+                        {{form.router_details.label_tag}}
+                        {{form.router_details}}
+                        {{form.router_details.errors}}
+                        {{form.package_details.label_tag}}
+                        {{form.package_details}}
+                        {{form.package_details.errors}}
+                        {{form.pop_details.label_tag}}
+                        {{form.pop_details}}
+                        {{form.pop_details.errors}}
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                        {{form.paid.label_tag}}
+                        {{form.paid}}
+                        {{form.paid.errors}}
+                        {{form.reseller.label_tag}}
+                        {{form.reseller}}
+                        {{form.reseller.errors}}
                     </div>
                     <div class="col-lg-6 form-right">
                         {{form.first_name.label_tag}}
@@ -33,10 +73,10 @@
                         {{form.last_name.errors}}
                         {{form.gender.label_tag}}
                         {{form.gender}}
-                        {{form.gender.errors}}                        
+                        {{form.gender.errors}}
                         {{form.nid.label_tag}}
                         {{form.nid}}
-                        {{form.nid.errors}}                        
+                        {{form.nid.errors}}
                     </div>
                 </div>
                 <input class="btn btn-primary sub-btn" type="submit" value="Save">

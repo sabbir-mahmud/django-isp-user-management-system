@@ -8,44 +8,41 @@ from django.contrib.auth import get_user_model
 
 class UserManager(BaseUserManager):
     # create user
-    def create_user(self, email, password=None):
-        if not email:
-            raise ValueError('Enter a valid email')
+    def create_user(self, user_id, password=None):
+        if not user_id:
+            raise ValueError('Enter a valid user_id')
 
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(user_id=user_id)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     # create super user / admin
-    def create_superuser(self, email, password=None):
-        if not email:
-            raise ValueError('Enter a valid email')
+    def create_superuser(self, user_id, password=None):
+        if not user_id:
+            raise ValueError('Enter a valid user_id')
 
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(user_id=user_id)
         user.set_password(password)
         user.staff = True
         user.admin = True
         user.save(using=self._db)
         return user
 
+# user id model
+
+
+class UserId(models.Model):
+    user = models.IntegerField(default=1000)
+
+    def __str__(self):
+        return str(self.user)
+
 # user model
 
 
 class User(AbstractBaseUser):
-    genders = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-        ('Others', 'Others'),
-    )
-    first_name = models.CharField(max_length=245)
-    last_name = models.CharField(max_length=245)
-    gender = models.CharField(max_length=245, choices=genders)
-    email = models.EmailField(max_length=245, unique=True)
-    phone = models.CharField(max_length=13, unique=True)
-    nid = models.CharField(max_length=13, unique=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
+    user_id = models.IntegerField(unique=True,)
     client = models.BooleanField(default=True)
     reseller = models.BooleanField(default=False)
     owner = models.BooleanField(default=False)
@@ -53,14 +50,14 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
 
-    # username replaced with email
-    USERNAME_FIELD = 'email'
+    # username replaced with user_id
+    USERNAME_FIELD = 'user_id'
     REQUIRED_FIELDS = []
 
     object = UserManager()
 
     def __str__(self):
-        return self.email
+        return str(self.user_id)
 
     def has_perm(self, perm, obj=None):
         return True
@@ -93,7 +90,7 @@ class Owners(models.Model):
     commission = models.FloatField(default=0)
 
     def __str__(self):
-        return self.user.email
+        return str(self.user.user_id)
 
 # staff id model
 

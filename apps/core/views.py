@@ -80,6 +80,10 @@ def insideView(request):
     reseller_count = Resellers.objects.all().count()
     staff_count = Staffs.objects.all().count()
 
+    # total staff salary
+    total_salary = Staffs.objects.filter(
+        status='Active').aggregate(Sum('salary'))['salary__sum'] if Staffs.objects.filter().exists() else 0
+
     context = {
         'isp_info': isp_info,
         'count': count,
@@ -97,6 +101,7 @@ def insideView(request):
         'collectedBill': collectedBill,
         'reseller_count': reseller_count,
         'staff_count': staff_count,
+        'total_salary': total_salary,
 
     }
     # returning html file

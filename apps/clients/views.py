@@ -2,7 +2,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from .models import Clients
-from apps.users.models import Staffs
+from apps.users.models import Staffs, UserId
 from .forms import StaffForm, ClientForm
 from django.contrib.auth import authenticate, login, logout
 from apps.core.models import Isp_info
@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from .filter import ClientFilter
 from django.db.models import Sum, Q
 from apps.users.forms import RegisterForm
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # staff view
@@ -194,9 +196,22 @@ def client_edit(request, pk):
 @staff_roles
 def client_register(request):
     isp_info = Isp_info.objects.filter(id=1).first()
-    form = RegisterForm()
+    user_id = UserId.objects.filter(id=1).first()
+    new_user_id = user_id.user + 1
+    user_id.user = new_user_id
+    user_id.save()
+    # creating new user:
+    User.object.create_user(
+        user_id=new_user_id,
+        password='Knet121357'
+    )
+    new_user = User.object.get(user_id=new_user_id)
+
+    # creating new client:
+    form = ClientForm(initial={'user': new_user, 'client_id': new_user_id})
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = ClientForm(request.POST, initial={
+                          'user': new_user, 'client_id': new_user_id})
         if form.is_valid():
             form.save()
             return redirect('client-show')

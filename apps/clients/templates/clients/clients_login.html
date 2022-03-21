@@ -26,16 +26,24 @@
             margin: auto;
             margin-top: 5%;
         }
+        @media (max-width: 576px) { 
+            .log-in{
+                margin-top: 10%;
+            }
+            .log-ing-wrapper {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
 <body>
     <section>
         <div class="container">
-            <div class="log-in">
+            <div class="log-in mt-3">
                 <h3>{{isp_info.name}} log In</h3>
             </div>
-            <div class="log-ing-wrapper">
+            <div class="log-ing-wrapper mt-3">
                 <form action="" method="post">
                     <form>
                         {% csrf_token %}
