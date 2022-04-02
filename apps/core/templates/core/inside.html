@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container-fluid">
     <!-- user and devices information -->
-    <div class="row row-cols-1 row-cols-lg-4 g-2">
+    <div class="row row-cols-1 row-cols-lg-5 g-2">
         <div class="col">
             <div class="bg-success user-panel">
                 <h3 class="text-white">Total User: {{count}}</h3>
@@ -14,9 +14,13 @@
             <div class="bg-success user-panel">
                 <h3 class="text-white">Paid User: {{paid_count}}</h3>
                 <h3 class="text-white">Unpaid User: {{unpaid_count}}</h3>
-                <h3 class="text-white">Collected Bill: {{collectedBill}} <span>Pending Bill:
-                        {{pendingbill}}</span>
-                </h3>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-success user-panel">
+                <h3 class="text-white">Total Bill: {{total_bill}}/= TK</h3>
+                <h3 class="text-white">Collected Bill: {{collectedBill}}/= TK</h3>
+                <h3 class="text-white">Pending Bill: {{pendingbill}}/= TK</h3>
             </div>
         </div>
         <div class="col">
@@ -33,6 +37,7 @@
                 <h3 class="text-white">Total Staff Salary: {{total_salary}}</h3>
             </div>
         </div>
+        
     </div>
 
     <!-- loged in user details -->
@@ -48,9 +53,9 @@
             <div class="col">
                 <div class="user-panel bg-secondary rounded-3 p-3">
                     <h3 class="text-white">Name: <a class="text-white" href="{% url 'owner-list' %}">
-                            {{request.user.first_name}} {{request.user.last_name}}</a>
+                            {{request.user.clients.first_name}} {{request.user.clients.last_name}}</a>
                     </h3>
-                    <h3 class="text-white">Phone: {{request.user.phone}}</h3>
+                    <h3 class="text-white">Phone: {{request.user.clients.phone}}</h3>
                     <h3 class="text-white"> User type:
                         {% if request.user.admin %}
                         Admin

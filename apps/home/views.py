@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from apps.clients.decorators import logged
 from apps.users.models import UserId
 from apps.clients.models import Clients
+from apps.clients.views import user_match
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -14,15 +15,8 @@ User = get_user_model()
 def home(request):
     # isp info
     isp_info = Isp_info.objects.filter(id=1).first()
-    # matching user details and clients details
-    user_id = UserId.objects.filter(id=1).first()
-    client = Clients.objects.filter(client_id=user_id.user).first()
-    if client is None:
-        user = User.object.get(user_id=user_id.user)
-        user.delete()
-        user_id.user = user_id.user - 1
-        user_id.save()
 
+    # context data
     context = {
         'isp_info': isp_info,
     }

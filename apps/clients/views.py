@@ -4,19 +4,29 @@ from django.shortcuts import render, redirect
 from .models import Clients
 from apps.users.models import Staffs, UserId
 from .forms import StaffForm, ClientForm
-from django.contrib.auth import authenticate, login, logout
 from apps.core.models import Isp_info
-from .decorators import logged, admin_roles, staff_roles
+from .decorators import admin_roles, staff_roles
 from django.contrib.auth.decorators import login_required
 from .filter import ClientFilter
 from django.db.models import Sum, Q
-from apps.users.forms import RegisterForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+# matching user details and clients details
+
+
+def user_match():
+    user_id = UserId.objects.filter(id=1).first()
+    client = Clients.objects.filter(client_id=user_id.user).first()
+    if client is None:
+        user = User.object.get(user_id=user_id.user)
+        user.delete()
+        user_id.user = user_id.user - 1
+        user_id.save()
+
 
 # staff view
-# staff showing view
+
 @login_required(login_url='client-login')
 @admin_roles
 def staffShow(request):
@@ -77,6 +87,8 @@ def staff_delete(request, pk):
 @login_required(login_url='client-login')
 @staff_roles
 def client_list(request):
+    # matching user details and clients details
+    user_match()
     clients = Clients.objects.all().order_by('-id')
     filters = ClientFilter(request.GET, queryset=clients)
     clients = filters.qs
@@ -109,6 +121,7 @@ def client_list(request):
 @login_required(login_url='client-login')
 @staff_roles
 def paid_client_list(request):
+    user_match()
     clients = Clients.objects.filter(Q(paid=True)
                                      & Q(status='Active')).order_by('-id')
     filters = ClientFilter(request.GET, queryset=clients)
@@ -142,6 +155,8 @@ def paid_client_list(request):
 @login_required(login_url='client-login')
 @staff_roles
 def unpaid_client_list(request):
+    # matching user details and clients details
+    user_match()
     clients = Clients.objects.filter(Q(paid=False)
                                      & Q(status='Active')).order_by('-id')
     filters = ClientFilter(request.GET, queryset=clients)
@@ -195,6 +210,7 @@ def client_edit(request, pk):
 @login_required(login_url='client-login')
 @staff_roles
 def client_register(request):
+    user_match()
     isp_info = Isp_info.objects.filter(id=1).first()
     user_id = UserId.objects.filter(id=1).first()
     new_user_id = user_id.user + 1
@@ -220,20 +236,6 @@ def client_register(request):
         'isp_info': isp_info,
     }
     return render(request, 'clients/clients_add.html', context)
-
-
-# user/client profle view
-
-@login_required(login_url='client-login')
-@staff_roles
-def client_Profile(request, pk):
-    client = Clients.objects.get(id=pk)
-    isp_info = Isp_info.objects.filter(id=1).first()
-    context = {
-        'client': client,
-        'isp_info': isp_info,
-    }
-    return render(request, 'clients/clients_profile.html', context)
 
 
 # user/client profile view

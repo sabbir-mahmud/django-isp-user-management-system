@@ -5,7 +5,10 @@
     margin-top: 1%;
     margin-left: 0%;
     padding: 1%;
+    padding-top: 7%;
+    height: 149px;
 }
+
 
 .user-panel h1 {
     font-size: 25px;
@@ -84,6 +87,7 @@ table {
 /* form title design */
 .form-title {
     margin-top: 1%;
+    margin-left: 1%;
 }
 
 .form-title h3 {

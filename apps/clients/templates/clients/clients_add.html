@@ -19,7 +19,6 @@
                             {{form.client_id}}
                             {{form.client_id.errors}}
                         </div>
-
                         {{form.email.label_tag}}
                         {{form.email}}
                         {{form.email.errors}}
@@ -29,13 +28,9 @@
                         {{form.nid.label_tag}}
                         {{form.nid}}
                         {{form.nid.errors}}
-
                         {{form.ip_username.label_tag}}
                         {{form.ip_username}}
                         {{form.ip_username.errors}}
-                        {{form.address.label_tag}}
-                        {{form.address}}
-                        {{form.address.errors}}
                         {{form.olt_details.label_tag}}
                         {{form.olt_details}}
                         {{form.olt_details.errors}}
@@ -48,21 +43,11 @@
                         {{form.router_details.label_tag}}
                         {{form.router_details}}
                         {{form.router_details.errors}}
-                        {{form.package_details.label_tag}}
-                        {{form.package_details}}
-                        {{form.package_details.errors}}
-                        {{form.pop_details.label_tag}}
-                        {{form.pop_details}}
-                        {{form.pop_details.errors}}
-                        {{form.status.label_tag}}
-                        {{form.status}}
-                        {{form.status.errors}}
+                        {% if request.user.admin %}
                         {{form.paid.label_tag}}
                         {{form.paid}}
                         {{form.paid.errors}}
-                        {{form.reseller.label_tag}}
-                        {{form.reseller}}
-                        {{form.reseller.errors}}
+                        {% endif %}
                     </div>
                     <div class="col-lg-6 form-right">
                         {{form.first_name.label_tag}}
@@ -74,9 +59,21 @@
                         {{form.gender.label_tag}}
                         {{form.gender}}
                         {{form.gender.errors}}
-                        {{form.nid.label_tag}}
-                        {{form.nid}}
-                        {{form.nid.errors}}
+                        {{form.address.label_tag}}
+                        {{form.address}}
+                        {{form.address.errors}}
+                        {{form.pop_details.label_tag}}
+                        {{form.pop_details}}
+                        {{form.pop_details.errors}}
+                        {{form.package_details.label_tag}}
+                        {{form.package_details}}
+                        {{form.package_details.errors}}
+                        {{form.status.label_tag}}
+                        {{form.status}}
+                        {{form.status.errors}}
+                        {{form.reseller.label_tag}}
+                        {{form.reseller}}
+                        {{form.reseller.errors}}
                     </div>
                 </div>
                 <input class="btn btn-primary sub-btn" type="submit" value="Save">

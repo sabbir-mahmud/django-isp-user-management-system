@@ -102,6 +102,7 @@ def insideView(request):
         'reseller_count': reseller_count,
         'staff_count': staff_count,
         'total_salary': total_salary,
+        'total_bill': total_bill,
 
     }
     # returning html file

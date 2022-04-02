@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <td scope="col"><a class="btn btn-sm btn-primary" href="{% url 'client-add' %}">Add</a></td>
-                        <td>Total User: {{count}}</td>
+                        <td><a href="{% url 'client-show' %}">Total User: {{count}}</a></td>
                         <td>Active User: {{active}}</td>
                         <td>Inactive User: {{inactive}}</td>
                         <td> <a href="{% url 'paid-client-show' %}">Paid User: {{paid_count}}</a></td>
@@ -30,6 +30,7 @@
                         <th style="width:90px" scope="col">S/L</th>
                         <th scope="col">Name</th>
                         <th scope="col">Client id</th>
+                        <th scope="col">Phone</th>
                         <th scope="col">IP/Username</th>
                         <th scope="col">Address</th>
                         <th scope="col">Status</th>
@@ -43,8 +44,9 @@
                     {% for client in clients %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
-                        <td>{{client.user.first_name}} {{client.user.last_name}}</td>
+                        <td>{{client.first_name}} {{client.last_name}}</td>
                         <td>{{client.client_id}}</td>
+                        <td>{{client.phone}}</td>
                         <td>{{client.ip_username}}</td>
                         <td>{{client.address}}</td>
                         <td>{{client.status}}</td>
@@ -60,7 +62,6 @@
                         <td>{{client.pop_details.pop_name}}</td>
                         <td>
                             <a class="btn btn-primary" href="{% url 'client-update' client.id %}">Edit</a>
-                            <a class="btn btn-warning" href="{% url 'client-profile' client.id %}">View</a>
                         </td>
                     </tr>
                     {% endfor %}

@@ -32,7 +32,7 @@ class Clients(models.Model):
     gender = models.CharField(max_length=245, choices=genders)
     email = models.EmailField(max_length=245)
     phone = models.CharField(max_length=11)
-    nid = models.CharField(max_length=13, unique=True)
+    nid = models.CharField(max_length=11)
     client_id = models.IntegerField(unique=True)
     ip_username = models.CharField(max_length=20,
                                    unique=True,
@@ -40,22 +40,22 @@ class Clients(models.Model):
                                    blank=True,
                                    verbose_name='IP/Username')
     address = models.CharField(max_length=100)
-    olt_details = models.OneToOneField(Olt,
+    olt_details = models.ForeignKey(Olt,
+                                    on_delete=models.CASCADE,
+                                    null=True,
+                                    blank=True)
+    onu_details = models.ForeignKey(Onu,
+                                    on_delete=models.CASCADE,
+                                    null=True,
+                                    blank=True)
+    switch_details = models.ForeignKey(Switch,
                                        on_delete=models.CASCADE,
                                        null=True,
                                        blank=True)
-    onu_details = models.OneToOneField(Onu,
+    router_details = models.ForeignKey(Router,
                                        on_delete=models.CASCADE,
                                        null=True,
                                        blank=True)
-    switch_details = models.OneToOneField(Switch,
-                                          on_delete=models.CASCADE,
-                                          null=True,
-                                          blank=True)
-    router_details = models.OneToOneField(Router,
-                                          on_delete=models.CASCADE,
-                                          null=True,
-                                          blank=True)
     package_details = models.ForeignKey(Package,
                                         on_delete=models.CASCADE,
                                         null=True,
