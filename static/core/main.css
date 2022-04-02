@@ -9,7 +9,6 @@
     height: 149px;
 }
 
-
 .user-panel h1 {
     font-size: 25px;
     text-transform: uppercase;
@@ -28,6 +27,36 @@
 }
 
 .user-panel h3 span {
+    margin-left: 11%;
+}
+
+.user-panel-devices{
+    box-shadow: 0px 0px 3px 0px;
+    border-radius: 5px;
+    margin-top: 1%;
+    margin-left: 0%;
+    padding: 1%;
+    padding-top: 7%;
+}
+
+.user-panel-devices h1 {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: black;
+    line-height: 35px;
+    margin-left: 1.5%;
+    font-family: emoji;
+}
+
+.user-panel-devices h3 {
+    font-size: 19px;
+    line-height: 30px;
+    font-family: emoji;
+    color: #000000ad;
+    margin-left: 4%;
+}
+
+.user-panel-devices h3 span {
     margin-left: 11%;
 }
 

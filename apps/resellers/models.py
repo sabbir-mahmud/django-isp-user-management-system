@@ -26,7 +26,7 @@ class Resellers(models.Model):
     status = models.CharField(max_length=245, choices=choice_status)
 
     def __str__(self):
-        return self.user.email
+        return str(self.rid)
 
 # resellers commission model
 

@@ -1,44 +1,7 @@
 {% extends 'core/base.html' %}
 {% block content %}
 <div class="container-fluid">
-    <!-- user and devices information -->
-    <div class="row row-cols-1 row-cols-lg-5 g-2">
-        <div class="col">
-            <div class="bg-success user-panel">
-                <h3 class="text-white">Total User: {{count}}</h3>
-                <h3 class="text-white">Active User: {{active}}</h3>
-                <h3 class="text-white">Inactive User: {{inactive}}</h3>
-            </div>
-        </div>
-        <div class="col">
-            <div class="bg-success user-panel">
-                <h3 class="text-white">Paid User: {{paid_count}}</h3>
-                <h3 class="text-white">Unpaid User: {{unpaid_count}}</h3>
-            </div>
-        </div>
-        <div class="col">
-            <div class="bg-success user-panel">
-                <h3 class="text-white">Total Bill: {{total_bill}}/= TK</h3>
-                <h3 class="text-white">Collected Bill: {{collectedBill}}/= TK</h3>
-                <h3 class="text-white">Pending Bill: {{pendingbill}}/= TK</h3>
-            </div>
-        </div>
-        <div class="col">
-            <div class="bg-success user-panel">
-                <h3 class="text-white">Total Olt: {{total_olt}}</h3>
-                <h3 class="text-white">Total Onu: {{total_onu}}</h3>
-                <h3 class="text-white">Total Switch: {{total_switch}}</h3>
-            </div>
-        </div>
-        <div class="col">
-            <div class="bg-success user-panel">
-                <h3 class="text-white">Total Reseller: {{reseller_count}}</h3>
-                <h3 class="text-white">Total Staff: {{staff_count}}</h3>
-                <h3 class="text-white">Total Staff Salary: {{total_salary}}</h3>
-            </div>
-        </div>
-        
-    </div>
+
 
     <!-- loged in user details -->
     <div class="user-profile-wrapper mt-3 mb-5">
@@ -49,10 +12,49 @@
             {% endif %}
         </div>
         <hr>
+        <!-- user and devices information -->
+        <div class="row row-cols-1 row-cols-lg-5 g-2">
+            <div class="col">
+                <div class="bg-success user-panel">
+                    <h3 class="text-white">Total User: {{count}}</h3>
+                    <h3 class="text-white">Active User: {{active}}</h3>
+                    <h3 class="text-white">Inactive User: {{inactive}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-success user-panel">
+                    <h3 class="text-white">Paid User: {{paid_count}}</h3>
+                    <h3 class="text-white">Unpaid User: {{unpaid_count}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-success user-panel">
+                    <h3 class="text-white">Total Bill: {{total_bill}}/= TK</h3>
+                    <h3 class="text-white">Collected Bill: {{collectedBill}}/= TK</h3>
+                    <h3 class="text-white">Pending Bill: {{pendingbill}}/= TK</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-success user-panel">
+                    <h3 class="text-white">Total Olt: {{total_olt}}</h3>
+                    <h3 class="text-white">Total Onu: {{total_onu}}</h3>
+                    <h3 class="text-white">Total Switch: {{total_switch}}</h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="bg-success user-panel">
+                    <h3 class="text-white">Total Reseller: {{reseller_count}}</h3>
+                    <h3 class="text-white">Total Staff: {{staff_count}}</h3>
+                    <h3 class="text-white">Total Staff Salary: {{total_salary}}</h3>
+                </div>
+            </div>
+
+        </div>
+        <hr>
         <div class="row row-cols-1 row-cols-lg-3 g-2 mt-3">
             <div class="col">
                 <div class="user-panel bg-secondary rounded-3 p-3">
-                    <h3 class="text-white">Name: <a class="text-white" href="{% url 'owner-list' %}">
+                    <h3 class="text-white">User: <a class="text-white" href="{% url 'owner-list' %}">
                             {{request.user.clients.first_name}} {{request.user.clients.last_name}}</a>
                     </h3>
                     <h3 class="text-white">Phone: {{request.user.clients.phone}}</h3>
@@ -67,9 +69,9 @@
             </div>
             <div class="col">
                 <div class="user-panel bg-success rounded-3 p-3">
-                    <h3 class="text-white">ID: {{request.user.clients.client_id}}</h3>
-                    <h3 class="text-white">IP: {{request.user.clients.ip_username}}</h3>
-                    <h3 class="text-white">Pop: {{request.user.clients.pop_details}}</h3>
+                    <h3 class="text-white">User ID: {{request.user.clients.client_id}}</h3>
+                    <h3 class="text-white">User IP: {{request.user.clients.ip_username}}</h3>
+                    <h3 class="text-white">User Pop: {{request.user.clients.pop_details}}</h3>
                 </div>
             </div>
             <div class="col">

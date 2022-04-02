@@ -210,7 +210,6 @@ def client_edit(request, pk):
 @login_required(login_url='client-login')
 @staff_roles
 def client_register(request):
-    user_match()
     isp_info = Isp_info.objects.filter(id=1).first()
     user_id = UserId.objects.filter(id=1).first()
     new_user_id = user_id.user + 1
